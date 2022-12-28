@@ -5,16 +5,28 @@ import HomeBanner from "./c-cpn/home-banner";
 import { HomeWrapper } from "./style";
 import { fetchHomeDataAction } from "@/store/modules/home";
 import HomeSectionV1 from "./c-cpn/home-section-v1";
-import SectionHeader from "@/components/section-header";
-import SectionRooms from "@/components/section-rooms";
+import HomeSectionV2 from "./c-cpn/home-section-v2";
+import HomeSectionV3 from "./c-cpn/home-section-v3";
+import { isEmpty } from "@/utils";
+import HomeLongfor from "./c-cpn/home-longfor";
 
 const Home = memo(() => {
   // 从redux中获取数据
-  const { goodPriceInfo, highScoreInfo, discountInfo } = useSelector(
+  const {
+    goodPriceInfo,
+    highScoreInfo,
+    discountInfo,
+    recommendInfo,
+    longforInfo,
+    plusInfo,
+  } = useSelector(
     (state) => ({
       goodPriceInfo: state.home.goodPriceInfo,
       highScoreInfo: state.home.highScoreInfo,
       discountInfo: state.home.discountInfo,
+      recommendInfo: state.home.recommendInfo,
+      longforInfo: state.home.longforInfo,
+      plusInfo: state.home.plusInfo,
     }),
     shallowEqual
   );
@@ -29,20 +41,14 @@ const Home = memo(() => {
     <HomeWrapper>
       <HomeBanner />
       <div className="content">
-        {/* 折扣数据 */}
-        <div className="discount">
-          <SectionHeader
-            title={discountInfo.title}
-            subtitle={discountInfo.subtitle}
-          />
-          <SectionRooms
-            roomList={discountInfo.dest_list?.["成都"]}
-            itemWidth="33.333%"
-          />
-        </div>
+        {isEmpty(discountInfo) && <HomeSectionV2 infoData={discountInfo} />}
+        {isEmpty(recommendInfo) && <HomeSectionV2 infoData={recommendInfo} />}
 
-        <HomeSectionV1 infoData={goodPriceInfo} />
-        <HomeSectionV1 infoData={highScoreInfo} />
+        {isEmpty(longforInfo) && <HomeLongfor infoData={longforInfo} />}
+
+        {isEmpty(goodPriceInfo) && <HomeSectionV1 infoData={goodPriceInfo} />}
+        {isEmpty(highScoreInfo) && <HomeSectionV1 infoData={highScoreInfo} />}
+        {isEmpty(plusInfo) && <HomeSectionV3 infoData={plusInfo} />}
       </div>
     </HomeWrapper>
   );

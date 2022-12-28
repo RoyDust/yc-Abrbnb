@@ -3,7 +3,7 @@ import React, { memo } from "react";
 import { HeaderWrapper } from "./style";
 
 const SectionHeader = memo((props) => {
-  const { title, subtitle = "默认子标题" } = props;
+  const { title, subtitle = "" } = props;
 
   return (
     <HeaderWrapper>

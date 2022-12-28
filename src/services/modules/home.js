@@ -18,3 +18,21 @@ export function getHomeDiscountData() {
     url: "/home/discount"
   })
 }
+
+export function getHomeHotRecommendData() {
+  return ycRequest.get({
+    url: "/home/hotRecommenddest"
+  })
+}
+
+export function getHomeLongforData() {
+  return ycRequest.get({
+    url: "/home/longfor"
+  })
+}
+
+export function getHomePlusData() {
+  return ycRequest.get({
+    url: "/home/plus"
+  })
+}
