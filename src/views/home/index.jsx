@@ -9,6 +9,7 @@ import HomeSectionV2 from "./c-cpn/home-section-v2";
 import HomeSectionV3 from "./c-cpn/home-section-v3";
 import { isEmpty } from "@/utils";
 import HomeLongfor from "./c-cpn/home-longfor";
+import { changeHeaderConfigAction } from "@/store/modules/main";
 
 const Home = memo(() => {
   // 从redux中获取数据
@@ -35,6 +36,7 @@ const Home = memo(() => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchHomeDataAction());
+    dispatch(changeHeaderConfigAction({ isFixed: true, topAlpha: true }));
   }, [dispatch]);
 
   return (

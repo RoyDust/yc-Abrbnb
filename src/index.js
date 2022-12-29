@@ -20,15 +20,17 @@ import theme from './assets/theme';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-
-  <Suspense fallback="loading">
-    <Provider store={store}>
+  /*
+  需要用Provider包裹起来suspense进行懒加载，否则异步加载js发出的时间不会进行监听
+  */
+  <Provider store={store}>
+    <Suspense fallback="loading">
       <ThemeProvider theme={theme}>
         <HashRouter>
           <App />
         </HashRouter>
       </ThemeProvider>
-    </Provider>
-  </Suspense>
+    </Suspense>
+  </Provider>
 
 );
